@@ -1,0 +1,20 @@
+{
+  "name": "tenjin-agent-plugins",
+  "owner": {
+    "name": "Tenjin",
+    "url": "https://www.tenjin.com"
+  },
+  "description": "Tenjin plugins for AI coding agents: hosted MCP access and SDK integration guides.",
+  "plugins": [
+    {
+      "name": "tenjin-core",
+      "source": "./tenjin-core",
+      "description": "Connect to Tenjin's hosted MCP server and guide its usage."
+    },
+    {
+      "name": "tenjin-sdk",
+      "source": "./tenjin-sdk",
+      "description": "Per-platform Tenjin SDK integration guides (iOS, Android, Flutter, Ionic, React Native, Unity)."
+    }
+  ]
+}

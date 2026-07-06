@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tenjin": {
+      "type": "http",
+      "url": "https://mcp.tenjin.com"
+    }
+  }
+}

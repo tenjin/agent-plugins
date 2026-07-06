@@ -1,0 +1,20 @@
+{
+  "name": "tenjin-agent-plugins",
+  "interface": {
+    "displayName": "Tenjin Agent Plugins"
+  },
+  "plugins": [
+    {
+      "name": "tenjin-core",
+      "source": { "source": "local", "path": "./tenjin-core" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    },
+    {
+      "name": "tenjin-sdk",
+      "source": { "source": "local", "path": "./tenjin-sdk" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+      "category": "Developer Tools"
+    }
+  ]
+}
