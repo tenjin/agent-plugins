@@ -1,6 +1,6 @@
 ---
 name: tenjin-apps
-description: Create, update, list, and inspect apps in Tenjin via the Tenjin MCP. Use when a user wants to add a new app to Tenjin, onboard an app, edit an existing app's name or credentials (iOS shared secret, Android public key, deeplink protocol), look up an app's ID, or check an app's integration status.
+description: Create, update, list, inspect, and delete apps in Tenjin via the Tenjin MCP. Use when a user wants to add a new app to Tenjin, onboard an app, edit an existing app's name or credentials (iOS shared secret, Android public key, deeplink protocol), look up an app's ID, check an app's integration status, or delete an app.
 ---
 
 # Tenjin Apps
@@ -37,11 +37,18 @@ Editable: `name`, `ios_shared_secret`, `public_key`, `protocol`, `destination_ur
 3. Call `update_apps` with the app's `id` and only the changed fields.
 4. Confirm what changed.
 
+## Deleting an app
+`delete_apps` soft-deletes one or more apps by `id` (per-item `{ok, id, error}` result).
+1. Resolve the app name to its UUID via `list_apps` and confirm the exact app (name + `bundle_id`) back to the user — never delete on an ambiguous match.
+2. Get explicit confirmation before calling `delete_apps`; deletion is destructive. Offer `dry_run: true` to validate the ids without deleting.
+3. Report which apps were deleted.
+
 ## Looking up an app / checking status
-- To find an app or its ID: `list_apps` with a `query` (preferred over paging).
+- To find an app or its ID: `list_apps` with a `query` (preferred over paging). `list_apps` returns a slim field set by default (`id`, `name`, `bundle_id`, `platform`) — enough to resolve a name to its `id`. For the full app record, pass `all_fields=true`, or fetch specific ids with `get_apps` (`ids`, max 50).
 - To check an app's callback/integration config for a channel: `inspect_app_integration` with `app_id` and `integration_id`.
 
 ## Safety
 - Never call `create_apps` without confirming `bundle_id` + `platform` first.
+- Never call `delete_apps` without confirming the exact app and getting explicit user confirmation — it's destructive.
 - Never guess a UUID. Always resolve via a `list_` tool.
 - Offer `dry_run: true` when the user seems unsure.

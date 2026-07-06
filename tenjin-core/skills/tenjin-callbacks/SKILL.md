@@ -37,6 +37,7 @@ Callback groups MUST be set up in this exact order, or the group comes back `act
 
 ## Updating callbacks
 - Custom S2S: `update_s2s_callbacks` with the callback's `id` (get it from `list_s2s_callbacks`) and changed fields.
+- Callback group: `update_callback_groups` with the group's `id` to toggle `active` or change `user_filter`/`event`/settings. A result can be `ok: true` but `active: false` — if so the group is NOT live; fill its `missing_settings` (shared creds via `update_callback_settings`) and re-check `active`.
 - Channel settings: `update_callback_settings` (merges into existing settings).
 
 ## Macros reference

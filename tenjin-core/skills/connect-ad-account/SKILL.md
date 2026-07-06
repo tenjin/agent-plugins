@@ -38,6 +38,13 @@ ad network and hand the user a link; the dashboard handles the rest.
    Let them know the dashboard is where they'll enter the network's
    credentials to finish the connection.
 
+## Checking what's already connected
+Connecting happens in the dashboard, but you can read the result: `list_ad_accounts`
+(filter by `query` or `channel_id`) shows the ad accounts already connected. Use it to
+check whether an account exists before sending the user off, or to confirm a connection
+finished. Each ad account's `id` is the `ad_account_id` used when creating a campaign
+against that specific account.
+
 ## Credentials are off-limits here
 
 Never collect, request, echo, or store an ad-network credential (API key,

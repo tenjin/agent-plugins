@@ -1,6 +1,6 @@
 ---
 name: tenjin-campaigns
-description: Create, update, and list campaigns and tracking links in Tenjin via the Tenjin MCP. Use when a user wants to create a campaign, generate or copy a tracking link, set up a campaign for a channel or ad account, look up existing campaigns, or change a campaign's attribution window.
+description: Create, update, list, and delete campaigns and tracking links in Tenjin via the Tenjin MCP. Use when a user wants to create a campaign, generate or copy a tracking link, set up a campaign for a channel or ad account, look up existing campaigns, change a campaign's attribution window, or delete a campaign.
 ---
 
 # Tenjin Campaigns
@@ -33,7 +33,7 @@ Required per campaign: `name`, `app_id`, and **exactly one** of `channel_id` OR 
 5. Report back the new campaign and its tracking link/URL from the response.
 
 ## Getting / copying tracking links
-The tracking link comes back in the `create_campaigns` and `list_campaigns` responses. To retrieve an existing link, use `list_campaigns` (filter by `app_id`, `channel_id`, or `query` — matches name, short_id, or remote_campaign_id) and hand the user the link value.
+`list_campaigns` returns a slim field set by default that does **not** include the tracking-link URLs. To retrieve an existing link, call `list_campaigns` with `show_tracking_links=true` (filter by `app_id`, `channel_id`, or `query` — matches name, short_id, or remote_campaign_id); that adds `click_tracking_url`, `impression_tracking_url`, and `remote_campaign_id` to each result. Hand the user the link value. For the full record of one or more known campaign ids, use `get_campaigns` (`ids`, max 50). The tracking link also comes back directly in the `create_campaigns` response.
 
 ## Updating a campaign
 Only `attribution_window` is mutable — name, app, channel, and ad account are fixed at creation.
@@ -41,9 +41,16 @@ Only `attribution_window` is mutable — name, app, channel, and ad account are 
 2. Call `update_campaigns` with the `id` and the new `attribution_window` (in seconds; default 604800 = 7 days).
 3. If the user asks to change anything other than attribution_window, tell them it's immutable — the campaign must be recreated.
 
+## Deleting a campaign
+`delete_campaigns` soft-deletes one or more campaigns by `id` (per-item `{ok, id, error}` result). Since a campaign is its tracking link, deleting it retires that link — warn the user before doing so.
+1. Resolve the campaign to its UUID via `list_campaigns` and confirm the exact campaign back to the user — never delete on an ambiguous match.
+2. Get explicit confirmation before calling `delete_campaigns`; deletion is destructive. Offer `dry_run: true` to validate the ids without deleting.
+3. Report what was deleted.
+
 ## Safety
 - Never send both `channel_id` and `ad_account_id`; never send neither.
 - Never create a campaign with `channel_id: 0` (Organic) — block it and tell the user.
+- Never call `delete_campaigns` without confirming the exact campaign and getting explicit user confirmation — it's destructive.
 - Never guess a UUID or id — always resolve via a `list_` tool.
 - Confirm the attach point (channel/ad account name) before creating.
 - Offer `dry_run: true` when the user seems unsure.
