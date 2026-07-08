@@ -9,12 +9,14 @@
     {
       "name": "tenjin-core",
       "source": "./tenjin-core",
-      "description": "Connect to Tenjin's hosted MCP server and guide its usage."
+      "description": "Connect to Tenjin's hosted MCP server and guide its usage.",
+      "license": "MIT"
     },
     {
       "name": "tenjin-sdk",
       "source": "./tenjin-sdk",
-      "description": "Per-platform Tenjin SDK integration guides (iOS, Android, Flutter, Ionic, React Native, Unity)."
+      "description": "Per-platform Tenjin SDK integration guides (iOS, Android, Flutter, Ionic, React Native, Unity).",
+      "license": "MIT"
     }
   ]
 }

@@ -78,4 +78,4 @@ at `https://mcp.tenjin.com`.
 - Claude Code CLI docs: <https://code.claude.com>
 - Codex docs: <https://developers.openai.com/codex>
 
-Licensed under Apache-2.0.
+Licensed under MIT.
