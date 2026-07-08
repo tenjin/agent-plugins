@@ -1,0 +1,16 @@
+{
+  "name": "tenjin-core",
+  "version": "0.1.0",
+  "description": "Connect to Tenjin's hosted MCP server and guide its usage.",
+  "author": { "name": "Tenjin", "url": "https://www.tenjin.com" },
+  "homepage": "https://github.com/tenjin/agent-plugins",
+  "repository": "https://github.com/tenjin/agent-plugins",
+  "license": "MIT",
+  "keywords": ["tenjin", "mobile", "analytics", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Tenjin Core",
+    "category": "Productivity"
+  }
+}
