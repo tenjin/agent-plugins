@@ -37,7 +37,7 @@ On Claude Code Web / Desktop, use the GUI instead:
 2. Click **Add → Add marketplace**.
 3. Choose **Add from a repository** and enter `tenjin/agent-plugins`.
 4. Install `tenjin-core` — and optionally `tenjin-sdk` — from the marketplace's plugin list.
-5. Complete Tenjin's OAuth flow when prompted — it opens automatically once `tenjin-core` installs.
+5. Connect the `tenjin` connector (mcp server). **Customize → Connectors → tenjin → Connect**
 
 ### Codex
 
