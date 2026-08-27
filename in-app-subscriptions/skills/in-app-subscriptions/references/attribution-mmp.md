@@ -57,22 +57,30 @@ TenjinSDK.instance.init(apiKey: tenjinApiKey);
 TenjinSDK.instance.connect();
 ```
 
-After your backend returns a successful verification, forward the purchase fields:
+After your backend returns a successful verification, forward the purchase fields. Both
+branches read everything off `purchase`, so cast it to the platform type first:
+`AppStorePurchaseDetails` from `in_app_purchase_storekit`, `GooglePlayPurchaseDetails`
+from `in_app_purchase_android`.
 
 ```dart
 Future<void> trackVerifiedSubscription(
   PurchaseDetails purchase,
   ProductDetails product,
 ) async {
-  if (Platform.isIOS) {
+  if (Platform.isIOS && purchase is AppStorePurchaseDetails) {
+    final txn = purchase.skPaymentTransaction;
+
+    // A first purchase has no originalTransaction; it is its own original.
+    final originalId = txn.originalTransaction?.transactionIdentifier ??
+        txn.transactionIdentifier;
+
     await TenjinSDK.instance.subscription(
       productId: product.id,
       currencyCode: product.currencyCode,
       unitPrice: product.rawPrice,
-      iosTransactionId: transactionId,
-      iosOriginalTransactionId: originalTransactionId,
-      iosReceipt: base64Receipt,
-      iosSKTransaction: signedTransactionJws,
+      iosTransactionId: txn.transactionIdentifier,
+      iosOriginalTransactionId: originalId,
+      iosReceipt: purchase.verificationData.serverVerificationData,
     );
   }
 
@@ -90,6 +98,12 @@ Future<void> trackVerifiedSubscription(
 }
 ```
 
+`iosSKTransaction` is for the StoreKit 2 signed transaction and has no StoreKit 1 equivalent,
+so it is omitted above. If your app has opted into StoreKit 2, note that the plugin's
+`SK2PurchaseDetails` does not currently expose the transaction identifiers at all
+([flutter/flutter#116383](https://github.com/flutter/flutter/issues/116383)) - take them from
+your own verification response instead, which is where the authoritative values already are.
+
 ### Native iOS
 
 ```objectivec
@@ -101,11 +115,15 @@ Future<void> trackVerifiedSubscription(
 NSDecimalNumber *price =
     [NSDecimalNumber decimalNumberWithString:@"9.99"];
 
+// transaction is the SKPaymentTransaction you just verified.
+NSString *originalId = transaction.originalTransaction.transactionIdentifier
+    ?: transaction.transactionIdentifier;
+
 [TenjinSDK subscriptionWithProductName:@"com.yourapp.premium.monthly"
                        andCurrencyCode:@"USD"
                           andUnitPrice:price
-                      andTransactionId:transactionId
-              andOriginalTransactionId:originalTransactionId
+                      andTransactionId:transaction.transactionIdentifier
+              andOriginalTransactionId:originalId
                       andBase64Receipt:base64Receipt
                       andSKTransaction:signedTransactionJws];
 ```

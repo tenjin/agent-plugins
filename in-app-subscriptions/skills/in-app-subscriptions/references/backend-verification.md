@@ -48,6 +48,9 @@ serve(async (req) => {
 });
 ```
 
+`json`, `db`, and `readUserIdFromAuthToken` are your own helpers; the parts worth copying are
+the ordering and the single write at the end.
+
 ## Apple
 
 Use the **App Store Server API**, endpoint *Get All Subscription Statuses*, keyed by the
