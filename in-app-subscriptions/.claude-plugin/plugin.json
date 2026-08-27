@@ -1,0 +1,8 @@
+{
+  "name": "in-app-subscriptions",
+  "version": "0.1.0",
+  "description": "End-to-end guidance for implementing native in-app subscriptions: store setup, client purchase flow, server-side verification, entitlement storage, store notifications, restore, and sandbox testing.",
+  "author": { "name": "Tenjin", "url": "https://www.tenjin.com" },
+  "homepage": "https://github.com/tenjin/agent-plugins",
+  "license": "MIT"
+}
