@@ -34,12 +34,12 @@ Once you know the platform, read the corresponding guide:
 
 | Platform | Guide file |
 |----------|-----------|
-| iOS | `references/ios.md` |
-| Android | `references/android.md` |
-| Flutter | `references/flutter.md` |
-| Ionic | `references/ionic.md` |
-| Unity | `references/unity.md` |
-| React Native | `references/react-native.md` |
+| iOS | [references/ios.md](references/ios.md) |
+| Android | [references/android.md](references/android.md) |
+| Flutter | [references/flutter.md](references/flutter.md) |
+| Ionic | [references/ionic.md](references/ionic.md) |
+| Unity | [references/unity.md](references/unity.md) |
+| React Native | [references/react-native.md](references/react-native.md) |
 
 ## Step 3: Follow the Guide
 
