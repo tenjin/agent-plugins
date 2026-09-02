@@ -15,6 +15,12 @@
       "source": { "source": "local", "path": "./tenjin-sdk" },
       "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
       "category": "Developer Tools"
+    },
+    {
+      "name": "in-app-subscriptions",
+      "source": { "source": "local", "path": "./in-app-subscriptions" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+      "category": "Developer Tools"
     }
   ]
 }

@@ -17,6 +17,12 @@
       "source": "./tenjin-sdk",
       "description": "Per-platform Tenjin SDK integration guides (iOS, Android, Flutter, Ionic, React Native, Unity).",
       "license": "MIT"
+    },
+    {
+      "name": "in-app-subscriptions",
+      "source": "./in-app-subscriptions",
+      "description": "Guidance for implementing native in-app subscriptions end to end: store setup, client purchase flow, server-side verification, entitlement storage, store notifications, restore, and sandbox testing.",
+      "license": "MIT"
     }
   ]
 }
