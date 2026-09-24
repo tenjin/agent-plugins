@@ -1,6 +1,6 @@
 {
   "name": "tenjin-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Per-platform Tenjin SDK integration guides for iOS, Android, Flutter, Ionic, React Native, and Unity.",
   "author": { "name": "Tenjin", "url": "https://www.tenjin.com" },
   "homepage": "https://github.com/tenjin/agent-plugins",
